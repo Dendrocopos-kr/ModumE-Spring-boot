@@ -39,6 +39,9 @@ public class UserService implements UserDetailsService {
 
 	public UserModel save(UserModel userModel, String role) {
 		// TODO Auto-generated method stublog.info(role);
+		UserModel result = userDAO.findById(userModel.getId());
+		if( result != null ){return null;}
+		
 		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
 		userModel.setAccountNonExpired(true);
 		userModel.setAccountNonLocked(true);

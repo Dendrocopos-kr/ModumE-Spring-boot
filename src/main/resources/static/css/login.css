@@ -38,7 +38,8 @@ body, fieldset, legend, form, input, a {
 }
 
 
-.input-containe label,input {
+.input-containe>label,
+.input-containe>input {
   padding: 10px;
   margin-bottom: 20px;
 }

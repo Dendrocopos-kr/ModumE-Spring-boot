@@ -1,7 +1,9 @@
 package com.amolrang.modume.api;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,13 +14,18 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.amolrang.modume.model.UserModel;
+import com.amolrang.modume.service.UserService;
 import com.amolrang.modume.utils.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 
 @Slf4j
 @Service
 public class CallApi {
+	@Autowired
+	private UserService userService;
 	public Map CallUserInfoToJson(OAuth2AuthenticationToken authentication,OAuth2AuthorizedClientService auth2AuthorizedClientService) {
 		OAuth2AuthorizedClient client = auth2AuthorizedClientService
 				.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
@@ -39,13 +46,37 @@ public class CallApi {
 
 			log.info("response:{}", response);
 			log.info("userInfo{}", response.getBody());
+			
+			Map userInfo = response.getBody();
+			
 			switch(authentication.getAuthorizedClientRegistrationId()) {
 			case "naver":
-				response.getBody();
+				Map naverUserInfo = (Map)userInfo.get("response");
+				log.info("userinfo_id :{}", naverUserInfo.get("id"));
+				log.info("userinfo_nickname :{}", naverUserInfo.get("nickname"));
+				log.info("userinfo_email :{}", naverUserInfo.get("email"));
 				//json obj
 				//obj => 추출
 				//return할때 json으로 정리해서 보내기.
 				return null;
+			case "kakao":
+				Map kakaoInfo = (Map)userInfo.get("kakao_account");
+				Map kakaoUserInfo = (Map)kakaoInfo.get("profile");
+				log.info("userinfo_id :{}", userInfo.get("id"));
+				log.info("userinfo_nickname :{}", kakaoUserInfo.get("nickname"));
+				log.info("userinfo_email :{}", kakaoInfo.get("email"));
+				return null;
+			case "google":
+				log.info("userinfo_id :{}", userInfo.get("sub"));
+				log.info("userinfo_name :{}", userInfo.get("name"));
+				log.info("userinfo_email :{}", userInfo.get("email"));
+				return null;
+
+			case "twitch":
+				log.info("userinfo_id :{}", userInfo.get("sub"));
+				log.info("userinfo_name :{}", userInfo.get("preferred_username"));
+				return null;
+
 			}
 			return response.getBody();
 		}

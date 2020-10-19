@@ -63,8 +63,11 @@ public class AuthenticationController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinAction(Model model, UserModel userModel) {
 		log.info("회원가입 post 접근");
-		userService.save(userModel, "ROLE_MEMBER");
-		return "redirect:" + StringUtils.LoginURLValue();
+		if( userService.save(userModel, "ROLE_MEMBER") == null ) {
+			return "/joinError";
+		}
+
+		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/denied")
