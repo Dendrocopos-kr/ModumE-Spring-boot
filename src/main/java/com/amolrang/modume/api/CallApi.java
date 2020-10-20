@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CallApi {
 	@Autowired
 	private UserService userService;
+	
 	public UserModel CallUserInfoToJson(OAuth2AuthenticationToken authentication,
 			OAuth2AuthorizedClientService auth2AuthorizedClientService) {
 		UserModel userModel = null;
@@ -35,7 +36,7 @@ public class CallApi {
 		String userInfoEndpointUri = client.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
 
 		if (!StringUtils.isEmpty(userInfoEndpointUri)){
-			userModel = new UserModel();
+			
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 			headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken().getTokenValue());
@@ -100,13 +101,17 @@ public class CallApi {
 				break;
 
 			}
-			//userModel에 뽑은 값 넣기 
-			userModel.setId(id);
-			userModel.setUsername(name);
-			//userInfoMap.put("userinfo_id", id);
-			//userInfoMap.put("userinfo_nickname", name);
-			//userInfoMap.put("userinfo_email", email);
-			log.info("userModel:{}",userModel);
+			if(userService.loadUserByUsername(id)==null) {
+				//id를 db에서 찾지 못했을 때
+				userModel = new UserModel();
+				userModel.setId(id);
+				userModel.setUsername(name);
+				log.info("userModel:{}",userModel);
+				//비밀번호.....
+				//userService.save(userModel, "ROLE_MEMBER");
+			}else {
+				//id가 같으면 정보 불러오기
+			}
 		}
 		return userModel;
 	}
