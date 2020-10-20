@@ -1,4 +1,4 @@
-package com.amolrang.modume.oauth;
+package com.amolrang.modume.provider;
 
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistration.Builder;
@@ -19,7 +19,7 @@ public enum CommonOAuth2Provider {
 			builder.jwkSetUri("https://www.googleapis.com/oauth2/v3/certs");
 			builder.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo");
 			builder.userNameAttributeName(IdTokenClaimNames.SUB);
-			builder.clientName("Google");
+			builder.clientName("google");
 			builder.clientId("327498212271-k08jmuqgri0octbl5tt78h749pf5irg5.apps.googleusercontent.com");
 			builder.clientSecret("sB_WQ5-BCPHXcvEcSjoeUyI8");
 			return builder;

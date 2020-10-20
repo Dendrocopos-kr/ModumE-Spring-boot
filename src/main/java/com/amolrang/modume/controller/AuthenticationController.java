@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthenticationController {
 	@Autowired
 	private UserService userService;
-
+	
 	@Autowired
 	private OAuth2AuthorizedClientService authorizedClientService;
 	
@@ -38,15 +38,26 @@ public class AuthenticationController {
 		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
 		return StringUtils.LoginURLValue();
 	}
+	
+	@RequestMapping(value = "/loginAction", method = RequestMethod.GET)
+	public String login(Model model, RedirectAttributes ra,Principal principal) {
+		log.info("로그인 성공페이지 GET접근 :{}", principal);
+		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
+		//기존 데이터베이스에 있는 자료 들고오기
+		UserModel UserInfoJson = new UserModel();
+		UserInfoJson.setUsername(principal.getName());
+		ra.addFlashAttribute("userInfo", UserInfoJson);
+		return "redirect:/main";
+	}
 
 	@RequestMapping(value = "/login_success", method = RequestMethod.GET)
-	public String login_success(Model model, OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
+	public String login_success(OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
-		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
-
-		Map UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
-
-		model.addAttribute("userInfo", UserInfoJson);
+		
+		//UserModel 정보 받아오기 (CallApi으로부터)
+		UserModel UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
+		
+		log.info("UserInfoJson:{}",UserInfoJson);
 		ra.addFlashAttribute("userInfo", UserInfoJson);
 		
 		return "redirect:/main";

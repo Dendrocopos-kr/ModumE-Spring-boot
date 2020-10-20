@@ -19,8 +19,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 
-import com.amolrang.modume.oauth.CommonOAuth2Provider;
-import com.amolrang.modume.oauth.CustomOAuth2Provider;
+import com.amolrang.modume.provider.CommonOAuth2Provider;
+import com.amolrang.modume.provider.CustomOAuth2Provider;
 import com.amolrang.modume.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 권한 필요없는 경로 추가
 		// loginPage("/login") -> 기본 spring security 로그인 페이지를 내 /login 주소로 매핑함
 		// permitAll은 모든 권한 다 됨
-		
 		// 로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, usernameParameter() 메서드를 통해 파라미터명을 변경할 수 있음
 		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/main").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();

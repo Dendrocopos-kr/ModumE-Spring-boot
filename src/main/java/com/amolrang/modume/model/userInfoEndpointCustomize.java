@@ -3,6 +3,7 @@ package com.amolrang.modume.model;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
@@ -17,11 +18,15 @@ public class userInfoEndpointCustomize implements UserDetails{
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
+	private String naverID;
+	private String twitchID;
+	private String googleID;
+	private String kakaoID;
 	private Collection<? extends GrantedAuthority> authorities;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.authorities;
 	}
 
 	@Override

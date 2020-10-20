@@ -20,7 +20,7 @@
 		<div class="closeLoginWindow">
 			<span class="material-icons" onclick="hideLogin()">clear</span>
 		</div>
-			<jsp:include page="/login"></jsp:include>
+			<jsp:include page="/WEB-INF/jsp/login.jsp"></jsp:include>
 		</div>
 	</div>
 	<div id="bg1">
@@ -87,7 +87,7 @@
     <script>
 
     function connect(event){
-    	username = '';
+    	username = '${userInfo.username}';
     	console.log(username)
     	if(username){
     		console.log("connect Start")
