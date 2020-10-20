@@ -1,4 +1,4 @@
-package com.amolrang.modume.model;
+package com.amolrang.modume.type;
 
 public enum MessageType {
 	CHAT,

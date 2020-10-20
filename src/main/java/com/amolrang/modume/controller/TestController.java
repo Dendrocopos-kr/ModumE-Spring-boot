@@ -10,7 +10,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amolrang.modume.model.ChatMessage;
+import com.amolrang.modume.model.ChatModel;
 import com.amolrang.modume.service.TestService;
 import com.amolrang.modume.service.UserService;
 

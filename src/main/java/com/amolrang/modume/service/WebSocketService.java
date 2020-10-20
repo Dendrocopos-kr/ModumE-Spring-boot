@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import com.amolrang.modume.model.ChatMessage;
-import com.amolrang.modume.model.MessageType;
+import com.amolrang.modume.model.ChatModel;
+import com.amolrang.modume.type.MessageType;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +33,7 @@ public class WebSocketService {
 		if(username != null) {
 			log.info("User Disconnected :" + username);
 			
-			ChatMessage chatMessage = new ChatMessage();
+			ChatModel chatMessage = new ChatModel();
 			chatMessage.setType(MessageType.LEAVE);
 			chatMessage.setSender(username);
 			

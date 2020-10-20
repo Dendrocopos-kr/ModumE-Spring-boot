@@ -19,8 +19,8 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 
-import com.amolrang.modume.oauth.CommonOAuth2Provider;
-import com.amolrang.modume.oauth.CustomOAuth2Provider;
+import com.amolrang.modume.provider.CommonOAuth2Provider;
+import com.amolrang.modume.provider.CustomOAuth2Provider;
 import com.amolrang.modume.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
