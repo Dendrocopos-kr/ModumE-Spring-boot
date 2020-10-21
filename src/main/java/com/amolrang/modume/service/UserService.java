@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.amolrang.modume.model.SocialModel;
+import com.amolrang.modume.model.TestModel;
 import com.amolrang.modume.model.UserModel;
 import com.amolrang.modume.repository.UserDAO;
 
@@ -35,7 +37,13 @@ public class UserService implements UserDetailsService {
 		userModel.setAuthorities(getAuthorities(user_id));
 		return userModel;
 	}
-
+	
+	public UserDetails loadSocialUserName(String user_id) throws UsernameNotFoundException{
+		SocialModel socialModel = userDAO.findId(user_id);
+		if(socialModel == null) { return socialModel;};
+		return socialModel;
+	}
+	
 	public UserModel save(UserModel userModel, String role) {
 		// TODO Auto-generated method stublog.info(role);
 		UserModel result = userDAO.findById(userModel.getId());
@@ -47,10 +55,19 @@ public class UserService implements UserDetailsService {
 		userModel.setCredentialsNonExpired(true);
 		userModel.setEnabled(true);
 		userModel.setUsername(userModel.getUsername());
-		
+		//saveUser(userModel);
 		log.info("userModel {}",userModel);
 		
 		return userDAO.save(userModel, role);
+	}
+	
+	public TestModel saveUser(UserModel userModel) {
+		TestModel testModel = new TestModel();
+		
+		testModel.setId(userModel.getId());
+		testModel.setPassword(userModel.getPassword());
+		
+		return userDAO.saveUser(testModel);
 	}
 
 	public Collection<GrantedAuthority> getAuthorities(String id) {
@@ -60,6 +77,11 @@ public class UserService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority(authority));
 		}
 		return authorities;
+	}
+
+	public SocialModel socialSave(SocialModel socialModel, String role) {
+		// TODO Auto-generated method stub
+		return userDAO.socialSave(socialModel, role);
 	}
 
 }

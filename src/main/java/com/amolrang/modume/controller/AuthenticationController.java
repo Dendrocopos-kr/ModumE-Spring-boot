@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.amolrang.modume.api.CallApi;
+import com.amolrang.modume.model.SocialModel;
+import com.amolrang.modume.model.TestModel;
 import com.amolrang.modume.model.UserModel;
 import com.amolrang.modume.service.UserService;
 import com.amolrang.modume.utils.StringUtils;
@@ -61,10 +63,9 @@ public class AuthenticationController {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
 		model.addAttribute(StringUtils.TitleKey(), "로그인 성공 페이지");
 		
-		//UserModel 정보 받아오기 (CallApi으로부터)
-		UserModel UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
-		
-		log.info("UserInfoJson:{}",UserInfoJson);
+		//SocialModel 정보 받아오기 (CallApi으로부터)
+		SocialModel UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
+		log.info("socialModel:{}",UserInfoJson);
 		model.addAttribute("userInfo", UserInfoJson);
 		ra.addFlashAttribute("userInfo", UserInfoJson);
 		
@@ -80,11 +81,12 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinAction(Model model, UserModel userModel) {
+	public String joinAction(Model model, UserModel userModel, TestModel testModel) {
 		log.info("회원가입 post 접근");
 		if( userService.save(userModel, "ROLE_MEMBER") == null ) {
 			return "/joinError";
 		}
+		userService.saveUser(userModel);
 		return "redirect:/main";
 	}
 

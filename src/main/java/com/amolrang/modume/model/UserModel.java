@@ -9,6 +9,7 @@ import lombok.Data;
 
 @Data
 public class UserModel implements UserDetails {
+	private int seq;
 	private String id;
 	private String username;
 	private String password;

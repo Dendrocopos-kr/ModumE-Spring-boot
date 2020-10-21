@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.amolrang.modume.model.SocialModel;
 import com.amolrang.modume.model.UserModel;
 import com.amolrang.modume.service.UserService;
 import com.amolrang.modume.utils.StringUtils;
@@ -27,14 +28,13 @@ public class CallApi {
 	@Autowired
 	private UserService userService;
 	
-	public UserModel CallUserInfoToJson(OAuth2AuthenticationToken authentication,
+	public SocialModel CallUserInfoToJson(OAuth2AuthenticationToken authentication,
 			OAuth2AuthorizedClientService auth2AuthorizedClientService) {
-		UserModel userModel = null;
 		OAuth2AuthorizedClient client = auth2AuthorizedClientService
 				.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 		log.info("access token:{}", client.getAccessToken().getTokenValue());
 		String userInfoEndpointUri = client.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
-
+		SocialModel socialModel = new SocialModel();
 		if (!StringUtils.isEmpty(userInfoEndpointUri)){
 			
 			RestTemplate restTemplate = new RestTemplate();
@@ -100,18 +100,19 @@ public class CallApi {
 				name = (String) userInfo.get("preferred_username");
 				break;
 			}
-			if(userService.loadUserByUsername(id)==null) {
+			if(userService.loadSocialUserName(id)==null) {
 				//id를 db에서 찾지 못했을 때
-				userModel = new UserModel();
-				userModel.setId(id);
-				userModel.setUsername(name);
-				log.info("userModel:{}",userModel);
+				
+				socialModel.setS_id(id);
+				socialModel.setUsername(name);
+				userService.socialSave(socialModel,"ROLE_MEMBER");
+				log.info("socialModel:{}",socialModel);
 				//비밀번호.....
 				//userService.save(userModel, "ROLE_MEMBER");
 			}else {
 				//id가 같으면 정보 불러오기
 			}
 		}
-		return userModel;
+		return socialModel;
 	}
 }
