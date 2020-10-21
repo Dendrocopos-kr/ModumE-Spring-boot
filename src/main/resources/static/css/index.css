@@ -1,6 +1,17 @@
 @charset "UTF-8";
 @import "reset.css";
 
+/* @Eunsil 전역 선택자 추가 */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .loginWindowContainer{
 	position: absolute;
 	display: grid;
@@ -140,6 +151,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 5px;
     position: relative;
+    min-width: 350px;
 }
 .chatContainer .hidden{
 	margin : 0 auto;

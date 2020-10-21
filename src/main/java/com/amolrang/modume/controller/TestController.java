@@ -31,9 +31,9 @@ public class TestController {
 		return principal.toString();
 	}
 	
-	@RequestMapping(value = "/eunsil", method = RequestMethod.GET)
-	public String eunsil(Principal principal) {
-		return "/test-board";
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
+	public String boardList(Principal principal) {
+		return "/boardList";
 	}
 	
  }

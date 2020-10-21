@@ -56,10 +56,21 @@ function openChat() {
 	console.log('chat화면 띄우기 완료')
 }
 
+
 function openboard() {
     const makeDiv = document.createElement('div');
     makeDiv.className = 'boardContainer';
     sectionContainer.append(makeDiv);
+	fetchBoardList();
+}
+
+
+function fetchBoardList() {
+	fetch('/boardList').then(function(response) {
+		response.text().then(function(text) {
+			document.querySelector('.boardContainer').innerHTML = text;
+		})
+	})
 }
 
 function closeContainer(ele) {
@@ -250,6 +261,8 @@ function removeLogin() {
 	let loginWindowContainer = document.querySelector('#loginWindowContainer');
 	loginWindowContainer.remove();
 }
+
+
 
 
 /*usernameForm.addEventListener('submit', connect, true)*/
