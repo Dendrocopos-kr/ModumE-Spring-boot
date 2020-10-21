@@ -29,7 +29,7 @@ public interface UserMapper {
 	List<String> readautorities(String id);
 	
 	
-	
+	// 회원정보의 seq를 받아와서 저장
 	@Insert("INSERT INTO user_site(isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username)(select #{isAccountNonExpired}, #{isAccountNonLocked}, #{isCredentialsNonExpired}, #{isEnabled}, #{username})")
 	int insUser(UserModel userModel);
 	

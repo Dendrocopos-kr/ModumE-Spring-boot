@@ -9,6 +9,8 @@ import lombok.Data;
 
 @Data
 public class SocialModel implements UserDetails{
+	//social 테이블에 들어가는 정보 
+	//UserDetails는 추후 마이페이지 추가될시 수정 예정(2020.10.21)
 	private int seq;
 	private String s_id;
 	private String username;

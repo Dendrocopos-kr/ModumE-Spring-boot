@@ -38,6 +38,7 @@ public class UserService implements UserDetailsService {
 		return userModel;
 	}
 	
+	//현재 마이페이지로 가는 페이지가 없으므로 소셜 로그인시 db에 정보가없으면 자동으로 검사
 	public UserDetails loadSocialUserName(String user_id) throws UsernameNotFoundException{
 		SocialModel socialModel = userDAO.findId(user_id);
 		if(socialModel == null) { return socialModel;};
@@ -61,6 +62,7 @@ public class UserService implements UserDetailsService {
 		return userDAO.save(userModel, role);
 	}
 	
+	//userModel에서 뽑아온 정보에서 id / pw만 추출
 	public TestModel saveUser(UserModel userModel) {
 		TestModel testModel = new TestModel();
 		
@@ -79,6 +81,7 @@ public class UserService implements UserDetailsService {
 		return authorities;
 	}
 
+	//소셜 로그인시 
 	public SocialModel socialSave(SocialModel socialModel, String role) {
 		// TODO Auto-generated method stub
 		return userDAO.socialSave(socialModel, role);

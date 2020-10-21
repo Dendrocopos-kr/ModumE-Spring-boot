@@ -100,6 +100,7 @@ public class CallApi {
 				name = (String) userInfo.get("preferred_username");
 				break;
 			}
+			//2020.10.20 마이페이지 넘어가는 곳 만들지 못해서 임시 생성한 구간
 			if(userService.loadSocialUserName(id)==null) {
 				//id를 db에서 찾지 못했을 때
 				

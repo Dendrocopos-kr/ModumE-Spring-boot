@@ -46,11 +46,6 @@ public class AuthenticationController {
 	public String login(Model model, RedirectAttributes ra,Principal principal) {
 		log.info("로그인 성공페이지 GET접근 :{}", principal);
 		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
-		Object principal2 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails)principal2;
-		log.info("id_info :{}", userDetails);
-		
-		
 		//기존 데이터베이스에 있는 자료 들고오기
 		UserModel UserInfoJson = new UserModel();
 		UserInfoJson.setUsername(principal.getName());
@@ -86,6 +81,7 @@ public class AuthenticationController {
 		if( userService.save(userModel, "ROLE_MEMBER") == null ) {
 			return "/joinError";
 		}
+		//UserModel에서 저장된 정보를 site_auth에 저장하기 위해 재진입
 		userService.saveUser(userModel);
 		return "redirect:/main";
 	}
