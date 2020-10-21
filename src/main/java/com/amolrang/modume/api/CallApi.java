@@ -99,7 +99,6 @@ public class CallApi {
 				id = (String) userInfo.get("sub");
 				name = (String) userInfo.get("preferred_username");
 				break;
-
 			}
 			if(userService.loadUserByUsername(id)==null) {
 				//id를 db에서 찾지 못했을 때
