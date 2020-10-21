@@ -15,14 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<div class="loginWindow">
-		<div class="loginPageContainer">
-		<div class="closeLoginWindow">
-			<span class="material-icons" onclick="hideLogin()">clear</span>
-		</div>
-			<jsp:include page="/WEB-INF/jsp/login.jsp"></jsp:include>
-		</div>
-	</div>
 	<div id="bg1">
         <img src="/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
     </div>
@@ -85,6 +77,8 @@
     <!-- 트위치 채널 긁어오기(채널지정) -->
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
     <script>
+    
+    
 
     function connect(event){
     	username = '${userInfo.username}';
@@ -118,6 +112,8 @@
         // only needed if your site is also embedded on embed.example.com and othersite.example.com 
         parent: ["embed.example.com", "othersite.example.com"]
       }); */
+      
+      
     
     </script>
     

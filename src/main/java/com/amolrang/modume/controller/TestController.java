@@ -7,7 +7,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amolrang.modume.model.ChatModel;
@@ -17,7 +19,8 @@ import com.amolrang.modume.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController
+// @RestController
+@Controller
 public class TestController {
 	@Autowired
 	private TestService service;
@@ -27,4 +30,10 @@ public class TestController {
 		log.info("principal:{}",principal);
 		return principal.toString();
 	}
+	
+	@RequestMapping(value = "/eunsil", method = RequestMethod.GET)
+	public String eunsil(Principal principal) {
+		return "/test-board";
+	}
+	
  }
