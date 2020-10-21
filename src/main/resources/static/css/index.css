@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import "reset.css";
 
-/* @Eunsil 전역 선택자 추가 */
+/* @Eunsil 전역 스타일 추가 */
 .cursor-pointer {
     cursor: pointer;
 }
