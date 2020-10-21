@@ -128,6 +128,7 @@
 
 	<sec:authorize access="isAuthenticated()">
 		<script type="text/javascript">
+		console.log('${userInfo}')
 			axios.get('/CallVideo',{}).then(function(res){
 				const url = `\${res.data.data[0].url}`;
 				console.log(res)
