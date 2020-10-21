@@ -2,20 +2,6 @@
 @import "reset.css";
 
 
-.boardContainer {
-    width: 30%;
-    height: 68vh;
-    margin: 3% 1% 0 0.5%;
-    /* background-color: rgba(0, 0, 0, 0.6); */
-    background: #ffffff;
-    border-radius: 5px;
-    position: relative;
-    /* 내가 추가한 부분 */
-    display: flex; /* 이거 없으면 스크롤 안됨 */
-    min-width: 350px;
-    overflow-y: hidden; /* 새글, 탑 버튼 고정 때문 */
-}
-
 .boardContainer .boardContents {
     overflow-y: scroll;
     display: flex;

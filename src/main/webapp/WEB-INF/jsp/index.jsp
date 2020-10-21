@@ -13,6 +13,7 @@
     <link rel="icon" href="/img/favicon.png">
     <link rel="stylesheet" href="/css/index.css?ver=2">
     <link rel="stylesheet" href="/css/boardList.css?ver=1">
+    <link rel="stylesheet" href="/css/login.css?ver=1">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
      <!-- 아웃라인 material-icon 링크 추가 -->
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">

@@ -171,9 +171,12 @@
     width: 30%;
     height: 68vh;
     margin: 3% 1% 0 0.5%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: #ffffff;
     border-radius: 5px;
     position: relative;
+    display: flex;
+    min-width: 350px;
+    overflow-y: hidden;
 }
 
 .slideContainer .material-icons{
