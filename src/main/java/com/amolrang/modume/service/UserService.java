@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
 		testModel.setSeq(userModel.getSeq());
 		testModel.setId(userModel.getId());
 		testModel.setPassword(userModel.getPassword());
-		
+		log.info("testModel:{}",testModel);
 		return userDAO.saveUser(testModel);
 	}
 
@@ -84,6 +84,8 @@ public class UserService implements UserDetailsService {
 	//소셜 로그인시 
 	public SocialModel socialSave(SocialModel socialModel, String role) {
 		// TODO Auto-generated method stub
+		// userModel에서의 seq를 받아서 넣을 예정
+		socialModel.setSeq(54);
 		return userDAO.socialSave(socialModel, role);
 	}
 

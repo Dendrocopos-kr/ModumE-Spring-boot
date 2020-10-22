@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.data.repository.query.Param;
 
@@ -13,7 +14,7 @@ import com.amolrang.modume.model.UserModel;
 
 @Mapper
 public interface UserMapper {
-	@Select("SELECT * FROM site_auth inner join user_site on site_auth.seq = user_site.seq WHERE user_site.id=#{id}")
+	@Select("SELECT * FROM site_auth inner join user_site on site_auth.seq = user_site.seq WHERE id=#{id}")
 	UserModel readUser(String id);
 	
 	@Select("SELECT * FROM site_auth WHERE id=#{id}")
@@ -31,13 +32,14 @@ public interface UserMapper {
 	
 	// 회원정보의 seq를 받아와서 저장
 	// 현재 임시적 조치
-	@Insert("INSERT INTO user_site(id, isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username)(select #{id}, #{isAccountNonExpired}, #{isAccountNonLocked}, #{isCredentialsNonExpired}, #{isEnabled}, #{username})")
+	@Insert("INSERT INTO user_site(isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username)(select #{isAccountNonExpired}, #{isAccountNonLocked}, #{isCredentialsNonExpired}, #{isEnabled}, #{username})")
+	@Options(useGeneratedKeys = true, keyProperty = "seq")
 	int insUser(UserModel userModel);
 	
-	@Insert("INSERT INTO site_auth(seq, id, password)(select(select seq from user_site where id= #{id}), #{id}, #{password})")
+	@Insert("INSERT INTO site_auth(seq, id, password)values(#{seq}, #{id},#{password})")
 	int insertUser(TestModel testModel);
 
-	@Insert("Insert into social(seq,s_id,username)(select(select seq from user_site limit 1), #{s_id},#{username})")
+	@Insert("Insert into social(seq,s_id,username)values(#{seq}, #{s_id},#{username})")
 	int insertSocialUser(SocialModel socialModel);
 	
 	
