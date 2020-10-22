@@ -125,7 +125,8 @@
 
 	<sec:authorize access="isAuthenticated()">
 		<script type="text/javascript">
-			axios.get('/CallVideo',{}).then(function(res){
+		console.log('${userInfo}')
+			/* axios.get('/CallVideo',{}).then(function(res){
 				const url = `\${res.data.data[0].url}`;
 				console.log(res)
 				console.log(res.data.data[0].url)
@@ -135,7 +136,7 @@
 					 playing: true,
 					 controls: true
 				 })
-			})
+			}) */
 	    </script>
 	</sec:authorize>
 </body>
