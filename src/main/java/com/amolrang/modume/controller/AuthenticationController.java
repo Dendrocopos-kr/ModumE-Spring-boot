@@ -80,9 +80,10 @@ public class AuthenticationController {
 		log.info("회원가입 post 접근");
 		if( userService.save(userModel, "ROLE_MEMBER") == null ) {
 			return "/joinError";
+		}else {
+			//UserModel에서 저장된 정보를 site_auth에 저장하기 위해 재진입
+			userService.saveUser(userModel);
 		}
-		//UserModel에서 저장된 정보를 site_auth에 저장하기 위해 재진입
-		userService.saveUser(userModel);
 		return "redirect:/main";
 	}
 

@@ -33,6 +33,7 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
 		UserModel userModel = userDAO.findById(user_id);
+		
 		if(userModel == null) {return userModel;};
 		userModel.setAuthorities(getAuthorities(user_id));
 		return userModel;
@@ -57,7 +58,6 @@ public class UserService implements UserDetailsService {
 		userModel.setEnabled(true);
 		userModel.setUsername(userModel.getUsername());
 		//saveUser(userModel);
-		log.info("userModel {}",userModel);
 		
 		return userDAO.save(userModel, role);
 	}
@@ -65,7 +65,7 @@ public class UserService implements UserDetailsService {
 	//userModel에서 뽑아온 정보에서 id / pw만 추출
 	public TestModel saveUser(UserModel userModel) {
 		TestModel testModel = new TestModel();
-		
+		testModel.setSeq(userModel.getSeq());
 		testModel.setId(userModel.getId());
 		testModel.setPassword(userModel.getPassword());
 		

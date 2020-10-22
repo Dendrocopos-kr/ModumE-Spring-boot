@@ -13,7 +13,7 @@ import com.amolrang.modume.model.UserModel;
 
 @Mapper
 public interface UserMapper {
-	@Select("SELECT * FROM site_auth WHERE id=#{id}")
+	@Select("SELECT * FROM site_auth inner join user_site on site_auth.seq = user_site.seq WHERE user_site.id=#{id}")
 	UserModel readUser(String id);
 	
 	@Select("SELECT * FROM site_auth WHERE id=#{id}")
@@ -30,13 +30,14 @@ public interface UserMapper {
 	
 	
 	// 회원정보의 seq를 받아와서 저장
-	@Insert("INSERT INTO user_site(isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username)(select #{isAccountNonExpired}, #{isAccountNonLocked}, #{isCredentialsNonExpired}, #{isEnabled}, #{username})")
+	// 현재 임시적 조치
+	@Insert("INSERT INTO user_site(id, isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled, username)(select #{id}, #{isAccountNonExpired}, #{isAccountNonLocked}, #{isCredentialsNonExpired}, #{isEnabled}, #{username})")
 	int insUser(UserModel userModel);
 	
-	@Insert("INSERT INTO site_auth(seq, id, password)(select seq, #{id}, #{password} from user_site)")
+	@Insert("INSERT INTO site_auth(seq, id, password)(select(select seq from user_site where id= #{id}), #{id}, #{password})")
 	int insertUser(TestModel testModel);
 
-	@Insert("Insert into social(seq,s_id,username)(select seq, #{s_id},#{username}from user_site)")
+	@Insert("Insert into social(seq,s_id,username)(select(select seq from user_site limit 1), #{s_id},#{username})")
 	int insertSocialUser(SocialModel socialModel);
 	
 	

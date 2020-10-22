@@ -35,9 +35,9 @@ public class UserDAO {
 	
 	// 추가된 곳
 	// Return타입 잘 확인하기( SocialModel임)
-		public SocialModel findId(String id) {
-			return userMapper.selUser(id);
-		}
+	public SocialModel findId(String id) {
+		return userMapper.selUser(id);
+	}
 
 	public TestModel saveUser(TestModel testModel) {
 		userMapper.insertUser(testModel);	
@@ -47,6 +47,6 @@ public class UserDAO {
 	public SocialModel socialSave(SocialModel socialModel, String role) {
 		// TODO Auto-generated method stub
 		userMapper.insertSocialUser(socialModel);
-		return null;
+		return socialModel;
 	}
 }
