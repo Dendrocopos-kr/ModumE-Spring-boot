@@ -178,6 +178,12 @@ function openUserMenu(isLogin) {
 	makeSpan2_2_1.classList.add('cursor');
 	makeSpan2_2_1.innerText = '로그아웃';
 	makeSpan2_2_1.setAttribute('onclick',"location.href='/logout'");
+	
+	const makeSpan2_2_2 = document.createElement('span');
+	makeSpan2_2_2.classList.add('cursor');
+	makeSpan2_2_2.innerText = '마이페이지';
+	makeSpan2_2_2.setAttribute('onclick', 'openUserInfo()');
+	
 //	const makeSpan2_2_2 = document.createElement('span');
 //	makeSpan2_2_2.classList.add('cursor');
 //	makeSpan2_2_2.innerText = '메인화면';
@@ -185,7 +191,7 @@ function openUserMenu(isLogin) {
 	
 	if(isLogin) {
 		makeDiv2.append(makeSpan2_2_1);
-//		makeDiv2.append(makeSpan2_2_2);
+		makeDiv2.append(makeSpan2_2_2);
 	} else {
 		makeDiv2.append(makeSpan2_1_1);
 //		makeDiv2.append(makeSpan2_1_2);
@@ -219,3 +225,38 @@ function hideLogin() {
 }
 
 /*usernameForm.addEventListener('submit', connect, true)*/
+
+function openUserInfo() {
+	const body = document.querySelector('body');
+	const makeDiv = document.createElement('div');
+	makeDiv.classList.add('shadowWindow');
+	makeDiv.classList.add('userInfoWindow');
+	
+	const makeDiv2 = document.createElement('div');
+	makeDiv2.classList.add('loginPageContainer');
+	
+	const makeDiv2_1 = document.createElement('div');
+	makeDiv2_1.classList.add('closeLoginWindow');
+	
+	const makeSpan2_1_1 = document.createElement('span');
+	makeSpan2_1_1.classList.add('material-icons');
+	makeSpan2_1_1.innerText = 'clear';
+	makeSpan2_1_1.addEventListener('click', ()=>{
+		const userInfoWindow = document.querySelector('.userInfoWindow');
+		userInfoWindow.remove();
+	})	
+	
+	const makeDiv2_2 = document.createElement('div');
+	makeDiv2_2.classList.add('userInfoContainer');
+	/*fetch('/userinfo').then(function(response) {
+		response.text().then(function(text){
+			makeDiv2_2.innerHTML = text;
+		})
+	})*/
+	
+	makeDiv2_1.append(makeSpan2_1_1);
+	makeDiv2.append(makeDiv2_1);
+	makeDiv2.append(makeDiv2_2);
+	makeDiv.append(makeDiv2);
+	body.prepend(makeDiv);
+}

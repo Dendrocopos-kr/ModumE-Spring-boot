@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 <link rel="icon" href="/img/favicon.png">
-<link rel="stylesheet" href="/css/index.css?ver=1">
+<link rel="stylesheet" href="/css/index.css?ver=222">
 <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -83,8 +83,8 @@
 	</main>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-	<script src="/js/index.js?aaa=1"></script>
 	<script src="/js/login.js"></script>
+	<script src="/js/index.js?aaa=222"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<!-- 트위치 채널 긁어오기(채널지정) -->
 	<script src="https://embed.twitch.tv/embed/v1.js"></script>
