@@ -12,6 +12,12 @@
     align-items: center;
 }
 
+.mr5 {
+	margin-right: 5px;
+}
+
+
+
 .loginWindowContainer{
 	position: absolute;
 	display: grid;
@@ -175,8 +181,9 @@
     border-radius: 5px;
     position: relative;
     display: flex;
+    flex-direction: column;
     min-width: 350px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .slideContainer .material-icons{
