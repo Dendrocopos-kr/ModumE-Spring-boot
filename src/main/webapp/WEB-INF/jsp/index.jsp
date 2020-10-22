@@ -145,7 +145,7 @@
 				})
 			})
 			axios.get('/getStreams',{}).then(function(res){
-				console.log(res)
+				console.log(r파
 			})
 			
 	    </script>
