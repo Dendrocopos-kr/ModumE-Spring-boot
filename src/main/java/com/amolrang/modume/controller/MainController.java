@@ -29,7 +29,6 @@ public class MainController {
 	@RequestMapping(value = "/main",method = RequestMethod.GET)
 	public String index(Model model,Principal principal) throws IOException{
 		model.addAttribute(StringUtils.TitleKey(),"ModumE");
-		
 		log.info("메인화면GET접근");
 		if(principal != null) {
 			log.info("유저정보 : {}",principal);

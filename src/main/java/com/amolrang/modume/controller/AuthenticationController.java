@@ -3,6 +3,9 @@ package com.amolrang.modume.controller;
 import java.security.Principal;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -40,26 +43,26 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value = "/loginAction", method = RequestMethod.GET)
-	public String login(Model model, RedirectAttributes ra,Principal principal) {
+	public String login(Model model, HttpSession hs,Principal principal) {
 		log.info("로그인 성공페이지 GET접근 :{}", principal);
 		model.addAttribute(StringUtils.TitleKey(), "로그인페이지");
 		//기존 데이터베이스에 있는 자료 들고오기
 		UserModel UserInfoJson = new UserModel();
 		UserInfoJson.setUsername(principal.getName());
-		ra.addFlashAttribute("userInfo", UserInfoJson);
+		hs.setAttribute("userInfo", UserInfoJson);
 		
 		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/login_success", method = RequestMethod.GET)
-	public String login_success(OAuth2AuthenticationToken authentication, RedirectAttributes ra) {
+	public String login_success(OAuth2AuthenticationToken authentication, HttpSession hs) {
 		log.info("로그인 성공 페이지 GET접근 :{}", authentication);
 		
 		//UserModel 정보 받아오기 (CallApi으로부터)
 		UserModel UserInfoJson = callApi.CallUserInfoToJson(authentication, authorizedClientService);
 		
 		log.info("UserInfoJson:{}",UserInfoJson);
-		ra.addFlashAttribute("userInfo", UserInfoJson);
+		hs.setAttribute("userInfo", UserInfoJson);
 		
 		return "redirect:/main";
 	}
