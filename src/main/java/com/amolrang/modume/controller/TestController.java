@@ -30,4 +30,9 @@ public class TestController {
 		return "/boardList";
 	}
 	
+	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
+	public String boardDetail(Principal principal) {
+		return "/boardDetail";
+	}
+	
  }
