@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <link rel="icon" href="/img/favicon.png">
-    <link rel="stylesheet" href="/css/index.css?ver=4">
-    <link rel="stylesheet" href="/css/boardList.css?ver=2">
-    <link rel="stylesheet" href="/css/boardDetail.css?ver=2">
+    <link rel="stylesheet" href="/css/index.css?ver=5">
+    <link rel="stylesheet" href="/css/boardList.css?ver=3">
+    <link rel="stylesheet" href="/css/boardDetail.css?ver=4">
     <link rel="stylesheet" href="/css/login.css?ver=1">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
      <!-- 아웃라인 material-icon 링크 추가 -->
