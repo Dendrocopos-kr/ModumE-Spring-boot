@@ -19,7 +19,6 @@ public class StringUtils extends org.springframework.util.StringUtils{
 	
 	public static String siteUrlCustom(String site, String baseUrl) {
 		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(baseUrl);
-
 		switch (site) {
 		case "facebook":
 			uriBuilder.queryParam("fields", "name,email,picture,locale");

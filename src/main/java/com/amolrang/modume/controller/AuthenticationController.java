@@ -47,6 +47,7 @@ public class AuthenticationController {
 		UserModel UserInfoJson = new UserModel();
 		UserInfoJson.setUsername(principal.getName());
 		ra.addFlashAttribute("userInfo", UserInfoJson);
+		
 		return "redirect:/main";
 	}
 
