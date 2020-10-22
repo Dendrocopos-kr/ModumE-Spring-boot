@@ -3,18 +3,18 @@ package com.amolrang.modume.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.amolrang.modume.api.CallApi;
 import com.amolrang.modume.service.TestService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController
+// @RestController
+@Controller
 public class TestController {
 	@Autowired
 	private TestService service;
@@ -24,4 +24,10 @@ public class TestController {
 		log.info("principal:{}",principal);
 		return principal.toString();
 	}
+	
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
+	public String boardList(Principal principal) {
+		return "/boardList";
+	}
+	
  }

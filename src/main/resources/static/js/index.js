@@ -56,10 +56,21 @@ function openChat() {
 	console.log('chat화면 띄우기 완료')
 }
 
+
 function openboard() {
     const makeDiv = document.createElement('div');
     makeDiv.className = 'boardContainer';
     sectionContainer.append(makeDiv);
+	fetchBoardList();
+}
+
+
+function fetchBoardList() {
+	fetch('/boardList').then(function(response) {
+		response.text().then(function(text) {
+			document.querySelector('.boardContainer').innerHTML = text;
+		})
+	})
 }
 
 function closeContainer(ele) {
@@ -208,14 +219,50 @@ function openAlertMenu() {
 	centralMenu1_2.append(makeDiv);
 }
 
-function showLogin() {
-	const loginWindow = document.querySelector('.loginWindow');
-	loginWindow.style.zIndex = '3';
+function makeLogin() {
+	let loginWindowContainer = document.createElement('div');
+	loginWindowContainer.classList.add('loginWindowContainer');
+	loginWindowContainer.setAttribute('id', 'loginWindowContainer');
+	
+	let loginPageContainer = document.createElement('div');
+	loginPageContainer.classList.add('loginPageContainer');
+	
+	let closeLoginWindow = document.createElement('div');
+	closeLoginWindow.classList.add('closeLoginWindow');
+	
+	let material_icons = document.createElement('span');
+	material_icons.classList.add('material-icons');
+	material_icons.setAttribute('onclick', 'removeLogin()');
+	material_icons.innerText = 'clear';
+	
+	let loginWindow = document.createElement('div');
+	loginWindow.setAttribute('id', 'loginWindow');
+	
+	closeLoginWindow.append(material_icons);
+	loginPageContainer.append(closeLoginWindow);
+	loginPageContainer.append(loginWindow);
+	
+	loginWindowContainer.append(loginPageContainer);
+	
+	let body = document.querySelector('body');
+	body.prepend(loginWindowContainer);
 }
 
-function hideLogin() {
-	const loginWindow = document.querySelector('.loginWindow');
-	loginWindow.style.zIndex = '-2';
+function showLogin() {
+	fetch('/login').then(function(response) {
+		response.text().then(function(text) {
+			makeLogin();
+			document.querySelector('#loginWindow').innerHTML = text;
+		})
+	})
 }
+
+function removeLogin() {
+	let loginWindowContainer = document.querySelector('#loginWindowContainer');
+	loginWindowContainer.remove();
+}
+
+
+
 
 /*usernameForm.addEventListener('submit', connect, true)*/
