@@ -127,18 +127,27 @@
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${userInfo.sns == 'twitch'}">
 			<script type="text/javascript">
-		console.log('${userInfo}' )
-			 axios.get('/CallVideo',{}).then(function(res){
-				const url = `\${res.data.data[0].url}`;
+			axios.get('/CallFollows',{}).then(function(res){
 				console.log(res)
-				console.log(res.data.data[0].url)
-				 const container = document.getElementById('video')
-				 renderReactPlayer(container , {
-					 url,
-					 playing: true,
-					 controls: true
-				 })
+				axios.get('/CallVideo',{
+					params:{
+						follow : res.data.data[0].to_id
+						}
+				}).then(function(res){
+					console.log(res)
+					const url = `\${res.data.data[0].url}`;
+					 const container = document.getElementById('video')
+					 renderReactPlayer(container , {
+						 url,
+						 playing: true,
+						 controls: true
+					 })
+				})
 			})
+			axios.get('/getStreams',{}).then(function(res){
+				console.log(res)
+			})
+			
 	    </script>
 		</c:if>
 	</sec:authorize>

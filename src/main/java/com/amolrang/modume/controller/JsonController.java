@@ -35,7 +35,17 @@ public class JsonController {
 	}
 
 	@RequestMapping(value = "/CallVideo", produces = "text/plain;charset=UTF-8")
-	public String callVideo(OAuth2AuthenticationToken authentication) {
-		return callApi.callUserVideo(authentication, authorizedClientService);
+	public String callVideo(String follow,OAuth2AuthenticationToken authentication) {
+		return callApi.callUserVideo(follow,authentication, authorizedClientService);
+	}
+
+	@RequestMapping(value = "/CallFollows", produces = "text/plain;charset=UTF-8")
+	public String CallFollows(OAuth2AuthenticationToken authentication) {
+		return callApi.callTwitchMyFollows(authentication, authorizedClientService);
+	}
+	
+	@RequestMapping(value = "/getStreams", produces = "text/plain;charset=UTF-8")
+	public String getStreams(OAuth2AuthenticationToken authentication) {
+		return callApi.getStreams(authentication, authorizedClientService);
 	}
 }
