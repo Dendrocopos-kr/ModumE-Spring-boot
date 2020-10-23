@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로필 수우우우우우정</title>
 </head>
 <body>
 

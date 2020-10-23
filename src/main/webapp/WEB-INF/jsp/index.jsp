@@ -10,17 +10,13 @@
 <title>${title}</title>
 <link rel="icon" href="/img/favicon.png">
 <link rel="stylesheet" href="/css/index.css?ver=222">
+<link rel="stylesheet" href="/css/boardList.css?ver=1">
+<link rel="stylesheet" href="/css/login.css?ver=1">
 <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<!-- 아웃라인 material-icon 링크 추가 -->
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
-	<div class="loginWindow">
-		<div class="loginPageContainer">
-			<div class="closeLoginWindow">
-				<span class="material-icons" onclick="hideLogin()">clear</span>
-			</div>
-			<jsp:include page="/WEB-INF/jsp/login.jsp"></jsp:include>
-		</div>
-	</div>
 	<div id="bg1">
 		<img src="/img/yousef-salhamoud-kQ6mh2yagDw-unsplash.jpg" alt="" id="bg1_1">
 	</div>
@@ -85,6 +81,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 	<script src="/js/login.js"></script>
 	<script src="/js/index.js?aaa=222"></script>
+	<script src="/js/boardList.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<!-- 트위치 채널 긁어오기(채널지정) -->
 	<script src="https://embed.twitch.tv/embed/v1.js"></script>
@@ -123,13 +120,46 @@
         parent: ["embed.example.com", "othersite.example.com"]
       }); */
     </script>
+    
+ <script type="text/javascript">
+  const underline = document.getElementsByClassName('tabMenuBtn')
+  function temp(idx) {
+    addUnderLine(idx)
+    removeUnderLine(idx)
+  }
+  function addUnderLine(idx) {
+    for(var i=0; i < underline.length; i++) {
+      if( i == idx ){
+          underline[i].classList.add('underline')
+      }
+    }
+  }
 
-    <script src='https://unpkg.com/react-player/dist/ReactPlayer.standalone.js'></script>
+  function removeUnderLine(idx) {
+    for(var i=0; i < underline.length; i++) {
+      if( i == idx ){
+        continue;
+    }
+    underline[i].classList.remove('underline')
+    }
+  }
+  
+/*  const makeSpan = document.querySelector('.material-icons')
+  makeSpan.addEventListener('click', ()=>{
+    const closeIcons = document.querySelector('.closeIcons')
+    closeIcons.remove()
+  })*/
+
+</script>
+
+	<script src='https://unpkg.com/react-player/dist/ReactPlayer.standalone.js'></script>
+
 
 	<sec:authorize access="isAuthenticated()">
-		<script type="text/javascript">
-		console.log('${userInfo}')
-			axios.get('/CallVideo',{}).then(function(res){
+		<c:if test="${userInfo.sns == 'twitch'}">
+			<script type="text/javascript">
+		console.log('${userInfo}' )
+			 axios.get('/CallVideo',{}).then(function(res){
 				const url = `\${res.data.data[0].url}`;
 				console.log(res)
 				console.log(res.data.data[0].url)
@@ -141,6 +171,7 @@
 				 })
 			})
 	    </script>
+		</c:if>
 	</sec:authorize>
 </body>
 </html>

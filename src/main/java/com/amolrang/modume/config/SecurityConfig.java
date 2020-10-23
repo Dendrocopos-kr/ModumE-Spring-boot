@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
-		web.ignoring().antMatchers("/favicon.ico");
+//		web.ignoring().antMatchers("/favicon.ico");
 		web.ignoring().antMatchers("/css/**");
 		web.ignoring().antMatchers("/js/**");
 		web.ignoring().antMatchers("/img/**");
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// loginPage("/login") -> 기본 spring security 로그인 페이지를 내 /login 주소로 매핑함
 		// permitAll은 모든 권한 다 됨
 		// 로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, usernameParameter() 메서드를 통해 파라미터명을 변경할 수 있음
-		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/main").permitAll();
+		http.formLogin().loginPage("/login").usernameParameter("user_id").defaultSuccessUrl("/loginAction").permitAll();
 		http.authorizeRequests().antMatchers("/main").permitAll();
 		http.authorizeRequests().antMatchers("/join").permitAll();
 		http.authorizeRequests().antMatchers("/").permitAll();

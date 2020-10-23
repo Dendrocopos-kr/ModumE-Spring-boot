@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.amolrang.modume.service.TestService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+// @RestController
 @Controller
 public class TestController {
 	@Autowired
@@ -27,4 +29,9 @@ public class TestController {
 	public String userInfo() {
 		return "/userInfo";
 	}
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
+	public String boardList(Principal principal) {
+		return "/boardList";
+	}
+	
  }
