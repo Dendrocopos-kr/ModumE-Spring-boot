@@ -10,7 +10,7 @@ public class ModumEApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ModumEApplication.class, args);
-		
+		/* 브랜치 테스트 할거임*/
 	}
 
 }
