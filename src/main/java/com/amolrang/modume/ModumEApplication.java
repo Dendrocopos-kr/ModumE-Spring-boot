@@ -10,6 +10,7 @@ public class ModumEApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ModumEApplication.class, args);
+		/* 아니 내가 먼저 수정할건데?*/
 		/* 브랜치 테스트 할거임*/
 	}
 
